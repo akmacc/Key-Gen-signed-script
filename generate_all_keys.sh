@@ -60,7 +60,14 @@ mkdir -p "$destination_dir/keys"
 mv ~/.android-certs/* "$destination_dir/keys"
 
 # Create keys.mk
+
+if [[ $build_type == "1" ]]; then
+echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := $destination_dir/keys/releasekey" > "$destination_dir/product.mk"
+fi
+
+if [[ $build_type == "2" ]]; then
 echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := $destination_dir/keys/releasekey" > "$destination_dir/keys/keys.mk"
+fi
 
 # Create BUILD.bazel for LineageOS
 if [[ $build_type == "2" ]]; then
